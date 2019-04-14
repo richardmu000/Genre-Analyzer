@@ -8,6 +8,9 @@ from PIL import Image
 import pathlib
 import csv
 
+from google.cloud import storage
+
+
 import sklearn
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sklearn.model_selection import train_test_split
@@ -20,6 +23,15 @@ from keras.layers import Activation, Dense
 
 import warnings
 warnings.filterwarnings('ignore')
+
+
+storage_client = storage.Client()
+bucket = storage_client.get_bucket("genredataset")
+path = "gs://genredataset/data.csv"
+
+data = pd.read_csv(path)
+
+
 
 data = pd.read_csv('data.csv')
 data.head()
